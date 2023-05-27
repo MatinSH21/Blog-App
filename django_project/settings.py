@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users',
     'posts',
 
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -121,7 +123,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'staticfiles'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -136,3 +142,7 @@ AUTH_USER_MODEL = 'users.MyUser'
 
 LOGIN_URL = 'user-login'
 LOGIN_REDIRECT_URL = 'post-home'
+
+# Django Crispy Form
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

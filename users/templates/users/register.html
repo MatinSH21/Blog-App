@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
-{% block title%}
-    Register
-{% endblock %}
-{% block content%}
-    <div class="text-center rounded-5 border border-5">
-        <h1>Register</h1>
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form action="" method="post">
+            {% csrf_token %}
+            <feildset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form | crispy }}
+            </feildset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account?<a href="{% url 'user-login' %}" class="ml-2">Sign In</a>
+            </small>
+        </div>
     </div>
-    <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <input type="submit">
-    </form>
 {% endblock %}

@@ -26,7 +26,6 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
-
     class Meta:
         db_table = 'Posts'
         verbose_name = _('post')

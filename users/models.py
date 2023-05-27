@@ -4,6 +4,8 @@ from django.core import validators
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
+from PIL import Image
+
 
 class MyUserManager(BaseUserManager):
 
@@ -14,10 +16,11 @@ class MyUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, username=username,  **other_fields)
         user.set_password(password)
+        other_fields.setdefault('is_active', True)
         user.save()
         return user
 
-    def create_superuser(self, email, username, phone_number, password, **other_fields):
+    def create_superuser(self, email, username, password, **other_fields):
         other_fields.setdefault('is_active', True)
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -77,8 +80,20 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
+    def save(self, *args, **kwargs):
+        super(MyUser, self).save(*args, **kwargs)
+
+        img = Image.open(self.profile_picture.path)
+
+        if img.width > 300 or img.height > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.profile_picture.path)
+
+    def activate_account(self):
+        self.is_active = True
+
     class Meta:
         db_table = 'MyUser'
         verbose_name = _('user')
         verbose_name_plural = _('users')
-
