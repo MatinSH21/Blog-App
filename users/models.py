@@ -57,13 +57,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=50, blank=True)
     last_name = models.CharField(_('last name'), max_length=50, blank=True)
     email = models.EmailField(_('email'), unique=True)
-    phone_number = models.BigIntegerField(_('phone number'), unique=True, blank=True, null=True,
-                                          validators=[
-                                              validators.RegexValidator(r'^989[0-3,9]\d{8}$',
-                                                                        _("Enter a valid mobile number."),
-                                                                        'invalid')])
     is_staff = models.BooleanField(_('staff'), default=False)
-    is_active = models.BooleanField(_('active'), default=False)
+    is_active = models.BooleanField(_('active'), default=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     date_updated = models.DateTimeField(_('date updated'), auto_now=True)
     profile_picture = models.ImageField(_('profile picture'), default='default.jpg', upload_to='profile_pictures')
@@ -90,8 +85,6 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
             img.thumbnail(output_size)
             img.save(self.profile_picture.path)
 
-    def activate_account(self):
-        self.is_active = True
 
     class Meta:
         db_table = 'MyUser'

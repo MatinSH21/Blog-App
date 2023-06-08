@@ -22,6 +22,7 @@ class PostListView(ListView):
     context_object_name = 'posts'
     template_name = 'posts/index.html'
     ordering = ['-date_posted']
+    paginate_by = 5
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -59,7 +60,9 @@ class UserPostListView(ListView):
     model = Post
     template_name = 'posts/user_post.html'
     context_object_name = 'posts'
+    paginate_by = 5
 
     def get_queryset(self):
+        super().get_queryset()
         user = get_object_or_404(MyUser, username=self.kwargs.get('author'))
         return Post.objects.filter(author=user).order_by('-date_posted')
