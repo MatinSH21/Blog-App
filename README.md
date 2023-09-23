@@ -35,10 +35,10 @@ Follow step-by-step instructions for setting up the project locally.
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/your-project.git
+   git clone [https://github.com/yourusername/your-project.git](https://github.com/MatinSH21/Blog-App.git)
 2. Navigate into the cloned directory:
     ```sh
-   cd your-project
+   cd Blog-App
 3. Create a virtual environment (optional but recommended):
     ```sh
    python -m venv venv
