@@ -35,7 +35,7 @@ Follow step-by-step instructions for setting up the project locally.
 
 1. Clone the repository:
    ```sh
-   git clone [https://github.com/yourusername/your-project.git](https://github.com/MatinSH21/Blog-App.git)
+   git clone https://github.com/MatinSH21/Blog-App.git
 2. Navigate into the cloned directory:
     ```sh
    cd Blog-App
